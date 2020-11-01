@@ -1,15 +1,8 @@
 import React from "react";
-import Header from "../../components/Header";
-import MenuHeader from "../../components/MenuHeader";
+import Layout from "../../components/Layout";
 
-const HomePage = (props) => {
-  return (
-    <div>
-      <Header />
-      <MenuHeader />
-      <p>HomePage</p>
-    </div>
-  );
+const HomePage = () => {
+  return <Layout>HomePage</Layout>;
 };
 
 export default HomePage;

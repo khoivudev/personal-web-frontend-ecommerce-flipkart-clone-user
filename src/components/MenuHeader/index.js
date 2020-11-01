@@ -1,15 +1,9 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllCategory } from "../../actions";
+import React from "react";
+import { useSelector } from "react-redux";
 import "./style.css";
 
 const MenuHeader = (props) => {
   const category = useSelector((state) => state.category);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllCategory());
-  }, []);
 
   const renderCategories = (categories) => {
     let myCategories = [];
