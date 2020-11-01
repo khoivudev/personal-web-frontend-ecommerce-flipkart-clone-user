@@ -72,28 +72,6 @@ export default function (state = inititalState, action) {
         ...state,
         loading: false,
       };
-    case categoryTypes.ADD_CATEGORY_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case categoryTypes.ADD_CATEGORY_SUCCESS:
-      const category = action.payload.category;
-      const updatedCategories = buildNewCategories(
-        category.parentId,
-        state.categories,
-        category
-      );
-      return {
-        ...state,
-        categories: updatedCategories,
-        loading: false,
-      };
-    case categoryTypes.ADD_CATEGORY_FAILURE:
-      return {
-        ...state,
-        error: action.payload.error,
-      };
     default:
       return state;
   }
