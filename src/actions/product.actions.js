@@ -25,3 +25,30 @@ export const getProductsByCategorySlug = (slug) => (dispatch) => {
       });
     });
 };
+
+export const getProductPage = (params) => (dispatch) => {
+  dispatch({ type: productTypes.GET_PRODUCT_PAGE_REQUEST });
+  const { cid, type } = params;
+  axios
+    .get(`/page/${cid}/${type}`)
+    .then((res) => {
+      if (res.status === 200) {
+        dispatch({
+          type: productTypes.GET_PRODUCT_PAGE_SUCCESS,
+          payload: {
+            page: res.data.page,
+          },
+        });
+      } else {
+        dispatch({
+          type: productTypes.GET_PRODUCT_PAGE_FAILURE,
+          payload: {
+            error: res.data.error,
+          },
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

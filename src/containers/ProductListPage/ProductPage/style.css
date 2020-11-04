@@ -1,0 +1,13 @@
+.carousel .slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.carousel .slide {
+    max-height: 420px;
+    /* change this to whatever you want */
+    width: auto;
+    overflow: hidden;
+    text-align: center;
+}

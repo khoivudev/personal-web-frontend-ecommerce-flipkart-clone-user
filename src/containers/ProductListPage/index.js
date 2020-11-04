@@ -1,65 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getProductsByCategorySlug } from "../../actions";
+import React from "react";
+import { getParams } from "../../utils/getParams";
 import Layout from "../../components/Layout";
+import ProductStore from "./ProductStore";
+import ProductPage from "./ProductPage";
 import "./style.css";
-import { generatePublicUrl } from "../../urlConfig";
 
 const ProductListPage = (props) => {
-  const product = useSelector((state) => state.product);
-  const [priceRange, setPriceRange] = useState({
-    under5k: 5000,
-    under10k: 10000,
-    under15k: 15000,
-    under20k: 20000,
-    under30k: 30000,
-  });
-  const dispatch = useDispatch();
+  const renderProduct = () => {
+    const params = getParams(props.location.search);
+    switch (params.type) {
+      case "page":
+        return <ProductPage {...props} />;
+      case "store":
+        return <ProductStore {...props} />;
+      default:
+        return null;
+    }
+  };
 
-  useEffect(() => {
-    dispatch(getProductsByCategorySlug(props.match.params.slug));
-  }, []);
-
-  return (
-    <Layout>
-      {Object.keys(product.productsByPrice).map((key, index) => {
-        return (
-          <div className="card">
-            <div className="card__header">
-              <div className="card__header__title">
-                {props.match.params.slug} Mobiles {priceRange[key]}
-              </div>
-              <button>view all</button>
-            </div>
-            <div className="card__body">
-              {product.productsByPrice[key].map((product) => (
-                <div className="product__container">
-                  <div className="product__container__img">
-                    <img
-                      src={generatePublicUrl(product.productPictures[0].img)}
-                      alt=""
-                    />
-                  </div>
-                  <div className="product__container__info">
-                    <div className="product__container__info__name">
-                      {product.name}
-                    </div>
-                    <div>
-                      <span>4.3</span>
-                      <span>1231</span>
-                    </div>
-                    <div className="product__container__info__price">
-                      {product.price}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })}
-    </Layout>
-  );
+  return <Layout>{renderProduct()}</Layout>;
 };
 
 export default ProductListPage;
