@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import HomePage from "./containers/HomePage";
 import ProductListPage from "./containers/ProductListPage";
+import ProductDetailsPage from "./containers/ProductDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,10 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={HomePage} />
+          <Route
+            path="/:productSlug/:productId/p"
+            component={ProductDetailsPage}
+          />
           <Route path="/:slug" component={ProductListPage} />
         </Switch>
       </BrowserRouter>

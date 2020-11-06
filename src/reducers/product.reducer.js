@@ -12,6 +12,7 @@ const initialState = {
   },
   error: null,
   loading: false,
+  productDetails: {},
 };
 
 export default function (state = initialState, action) {
@@ -49,6 +50,23 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case productTypes.GET_PRODUCT_PAGE_FAILURE:
+      return {
+        ...state,
+        error: action.payload.error,
+        loading: false,
+      };
+    case productTypes.GET_PRODUCT_DETAILS_BY_ID_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case productTypes.GET_PRODUCT_DETAILS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        productDetails: action.payload.productDetails,
+        loading: false,
+      };
+    case productTypes.GET_PRODUCT_DETAILS_BY_ID_FAILURE:
       return {
         ...state,
         error: action.payload.error,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../actions";
+import { login, signout } from "../../actions";
 import flipkartLogo from "../../images/logo/flipkart.jpg";
 import goldenStar from "../../images/logo/golden-star.png";
 import { IoIosArrowDown, IoIosCart, IoIosSearch } from "react-icons/io";
@@ -21,9 +21,14 @@ const Header = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // if(auth.authenticate){
-    // }
+    if (auth.authenticate) {
+      setLoginModal(false);
+    }
   }, [auth.authenticate]);
+
+  const handleLogoutBtnClick = () => {
+    dispatch(signout());
+  };
 
   const renderLoggedInMenu = () => {
     return (
@@ -40,7 +45,12 @@ const Header = (props) => {
           { label: "Rewards", href: "", icon: null },
           { label: "Notifications", href: "", icon: null },
           { label: "Gift Cards", href: "", icon: null },
-          { label: "Logout", href: "", icon: null },
+          {
+            label: "Logout",
+            href: "",
+            icon: null,
+            onClick: handleLogoutBtnClick,
+          },
         ]}
       />
     );

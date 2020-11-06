@@ -5,7 +5,7 @@ import "./style.css";
 
 const Layout = (props) => {
   return (
-    <div class="layout">
+    <div className="layout">
       <Header />
       <MenuHeader />
       {props.children}
