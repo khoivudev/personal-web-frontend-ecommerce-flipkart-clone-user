@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { IoIosArrowDown } from "react-icons/io";
 import "./style.css";
 
 const MenuHeader = (props) => {
@@ -17,7 +18,9 @@ const MenuHeader = (props) => {
               {category.name}
             </a>
           ) : (
-            <span>{category.name}</span>
+            <span>
+              {category.name} <IoIosArrowDown />
+            </span>
           )}
           {category.children.length > 0 ? (
             <ul>{renderCategories(category.children)}</ul>

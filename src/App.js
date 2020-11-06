@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getAllCategory } from "./actions";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCategory, isUserLoggedIn } from "./actions";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import HomePage from "./containers/HomePage";
@@ -9,10 +9,14 @@ import ProductListPage from "./containers/ProductListPage";
 
 function App() {
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (!auth.authenticate) {
+      dispatch(isUserLoggedIn());
+    }
     dispatch(getAllCategory());
-  }, []);
+  }, [auth.authenticate]);
 
   return (
     <div className="app">
