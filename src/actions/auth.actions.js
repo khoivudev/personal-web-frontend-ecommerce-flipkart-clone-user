@@ -1,4 +1,4 @@
-import { authTypes } from "./types";
+import { authTypes, cartTypes } from "./types";
 import axios from "../helpers/axios";
 
 export const login = (user) => (dispatch) => {
@@ -56,9 +56,14 @@ export const signout = () => (dispatch) => {
     .post("/auth/signout")
     .then((res) => {
       if (res.status === 200) {
+        // localStorage.removeItem("user");
+        // localStorage.removeItem("token");
         localStorage.clear();
         dispatch({
           type: authTypes.LOGOUT_SUCCESS,
+        });
+        dispatch({
+          type: cartTypes.RESET_CART,
         });
       }
     })

@@ -32,5 +32,8 @@ export const productTypes = {
 };
 
 export const cartTypes = {
-  ADD_TO_CART: "ADD_TO_CART",
+  ADD_TO_CART_REQUEST: "ADD_TO_CART_REQUEST",
+  ADD_TO_CART_SUCCESS: "ADD_TO_CART_SUCCESS",
+  ADD_TO_CART_FAILURE: "ADD_TO_CART_FAILURE",
+  RESET_CART: "RESET_CART",
 };
