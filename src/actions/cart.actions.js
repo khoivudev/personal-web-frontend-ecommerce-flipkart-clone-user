@@ -1,10 +1,12 @@
 import { cartTypes } from "./types";
 import store from "../store";
 
-export const addToCart = (product) => (dispatch) => {
+export const addToCart = (product, newQty = 1) => (dispatch) => {
+  //if newQty=1 add one item to cart
+  //if newQty= -1 delete one item from cart
   const { cartItems } = store.getState().cart;
   const qty = cartItems[product._id]
-    ? parseInt(cartItems[product._id].qty + 1)
+    ? parseInt(cartItems[product._id].qty + newQty)
     : 1;
   cartItems[product._id] = {
     ...product,
