@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetailsById } from "../../actions";
+import { getProductDetailsById, addToCart } from "../../actions";
 import Layout from "../../components/Layout";
 import { IoIosArrowForward, IoIosStar, IoMdCart } from "react-icons/io";
 import { BiRupee } from "react-icons/bi";
@@ -64,6 +64,12 @@ const ProductDetailsPage = (props) => {
                   marginRight: "5px",
                 }}
                 icon={<IoMdCart />}
+                onClick={() => {
+                  const { _id, name, price } = product.productDetails;
+                  const img = product.productDetails.productPictures[0].img;
+                  dispatch(addToCart({ _id, name, price, img }));
+                  props.history.push("/cart");
+                }}
               />
               <MaterialButton
                 title="BUY NOW"

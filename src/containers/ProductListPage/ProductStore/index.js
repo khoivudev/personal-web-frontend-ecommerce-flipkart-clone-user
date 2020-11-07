@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductsByCategorySlug } from "../../../actions";
 import { generatePublicUrl } from "../../../urlConfig";
-
+import Card from "../../../components/UI/Card";
 import "./style.css";
 
 const ProductStore = (props) => {
@@ -26,18 +27,16 @@ const ProductStore = (props) => {
     <>
       {Object.keys(product.productsByPrice).map((key, index) => {
         return (
-          <div className="store-card">
-            <div className="store-card__header">
-              <div className="store-card__header__title">
-                {props.match.params.slug} Mobiles {priceRange[key]}
-              </div>
-              <button>view all</button>
-            </div>
+          <Card
+            headerleft={`${props.match.params.slug} mobiles under ${priceRange[key]}`}
+            headerright={<button>View All</button>}
+            style={{ width: "calc(100% - 40px)", margin: "20px" }}
+          >
             <div className="store-card__body">
               {product.productsByPrice[key].map((product) => (
-                <a
+                <Link
                   //target="_blank"
-                  href={`/${product.slug}/${product._id}/p`}
+                  to={`/${product.slug}/${product._id}/p`}
                   style={{ display: "flex" }}
                 >
                   <div className="product__container">
@@ -60,10 +59,10 @@ const ProductStore = (props) => {
                       </div>
                     </div>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
-          </div>
+          </Card>
         );
       })}
     </>
